@@ -2,14 +2,8 @@ import torch
 import torchvision
 from time import time
 
-#################### code changes ####################
-import intel_extension_for_pytorch as ipex
-######################################################
-
-model = torch.jit.load('quantized_model.pt')
+model = torchvision.models.resnet50(weights='ResNet50_Weights.DEFAULT')
 model.eval()
-model = torch.jit.freeze(model)
-data = torch.rand(1, 3, 224, 224)
 
 transform = torchvision.transforms.Compose([
     torchvision.transforms.Resize((224, 224)),
@@ -55,7 +49,6 @@ def inferModel(model, test_loader):
     accuracy = 100 * correct / total
     print('Accuracy = ', accuracy)
     print('Time Taken', infer_time*1000/(batches*128))
-
 
 
 with torch.no_grad():

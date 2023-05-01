@@ -47,12 +47,9 @@ def inferModel(model, test_loader):
             # Record time after finishing batch inference
             end_time = time()
 
-            if i>=3 and i<=num_batches-3:
-                infer_time += (end_time-start_time)
-                batches += 1
-            #Skip last few batches
-            if i == num_batches - 3:
-                break
+            infer_time += (end_time-start_time)
+            batches += 1
+
 
     accuracy = 100 * correct / total
     print('Accuracy = ', accuracy)
